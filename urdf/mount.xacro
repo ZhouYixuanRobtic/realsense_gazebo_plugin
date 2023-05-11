@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mount">
+  <xacro:macro name="mount" params="connected_to:='' rpy:='0 0 0' xyz:='0 0 0' ">
+    <xacro:unless value="${connected_to == ''}">
+      <joint name="mount_joint" type="fixed">
+        <parent link="${connected_to}" />
+        <child link="mount_board" />
+        <origin xyz="${xyz}" rpy="${rpy}" />
+      </joint>
+    </xacro:unless>
+
+   <link name="mount_board">
+   <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1539" />
+      <inertia
+        ixx="2.72544373e-8"
+        ixy="0.0"
+        ixz="2.7358692e-9"
+        iyy="0."
+        iyz="0."
+        izz="2.59683411e-8" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 ${pi}" />
+      <geometry>
+        <mesh
+          filename="package://realsense_gazebo_plugin/meshes/mount.dae" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 ${pi}" />
+      <geometry>
+        <mesh
+          filename="package://realsense_gazebo_plugin/meshes/mount.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  </xacro:macro>
+</robot>
